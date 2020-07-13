@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-// import items from './data';
+import items from './data';
 import Client from './Contenful';
-
+Client.getEntries({
+	content_type: "beachResortRoom"
+}).then(response => console.log(response.items))
 const RoomContext = React.createContext();
 // <RoomContext.Provider value={'hello'}
 class RoomProvider extends Component {
@@ -25,7 +27,7 @@ class RoomProvider extends Component {
 		try {
 			let response = await Client.getEntries({
 				content_type: 'beachResortRoom',
-				// order: "sys.createdAt"
+				order: "sys.createdAt",
 				order: 'fields.price'
 			});
 			let rooms = this.formatData(response.items);
